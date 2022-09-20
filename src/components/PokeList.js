@@ -166,7 +166,7 @@ export default function PokeList() {
                                 <Grid sx={{ display: 'flex', justifyContent: 'center', paddingLeft: '0!important' }} item xs={12} sm={6} md={4} lg={3} key={pokemon.name}>
                                     <Card component={Link} to={`pokemons/${pokemon.id}`} sx={{ width: '12rem', height: '19rem', textDecoration: 'none' }} elevation={0}>
                                         <div style={{ backgroundColor: '#F2F2F2', borderRadius: 5, padding: 30 }}>
-                                            <CardMedia component="img" image={`${pokemon.url}`} alt="Missing image" sx={{ margin: 'auto', objectFit: 'contain', width: '100%', borderRadius: 5 }} />
+                                            <CardMedia component="img" image={`${pokemon.url}`||`http://localhost:3000/images/${pokemon.id}.png` } alt="Missing image" sx={{ margin: 'auto', objectFit: 'contain', width: '100%', borderRadius: 5 }} />
                                         </div>
                                         <CardContent sx={{ paddingBottom: 0 }}>
                                             <Typography variant="small" color="gray">
