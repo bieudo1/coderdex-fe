@@ -4,7 +4,7 @@ import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Typography from '@mui/material/Typography';
 import { useState } from 'react';
-import { Box, Button, Container, Grid, Stack } from '@mui/material';
+import { Box, Container, Grid, Stack } from '@mui/material';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { PokeType } from './PokeType';
 import { useDispatch, useSelector } from 'react-redux';
@@ -115,7 +115,6 @@ const styles = {
 
 export default function PokeList() {
     const [expanded, setExpanded] = useState(false);
-    const [next, setNext] = useState(false);
     const dispatch = useDispatch();
     const { pokemons } = useSelector((state) => state.pokemons);
     const handleChangePage = () => {
@@ -155,7 +154,7 @@ export default function PokeList() {
                         style={{ paddingBottom: '1rem', overflow: 'visible!important' }}
                         dataLength={pokemons.length}
                         next={handleChangePage}
-                        hasMore={next}
+                        hasMore={true}
                         loader={
                             <Container maxWidth="md" sx={{ backgroundColor: 'white', textAlign: 'center', height: '2.5rem' }}>
                                 <img alt="loading" className="loading" src="./images/pokeball_gray.png" />
@@ -185,12 +184,13 @@ export default function PokeList() {
                                     </Card>
                                 </Grid>
                             ))}
-                            <Grid sx={{ textAlign: 'center' }} item xs={12} sm={12} md={12}>
+                            {/* <Grid sx={{ textAlign: 'center' }} item xs={12} sm={12} md={12}>
                                 <Box sx={{ ...styles.foot, bottom: next ? '-5rem' : '-2.5rem' }}></Box>
                                 <Button sx={{ ...styles.loadmore, display: next ? 'none' : 'inline-block' }} onClick={() => setNext(true)}>
                                     Load more Pokémon
                                 </Button>
-                            </Grid>
+                            </Grid> */}
+
                         </Grid>
                     </InfiniteScroll>
                 }

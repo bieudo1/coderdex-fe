@@ -1,0 +1,13 @@
+{ "data": [
+    {
+        "id": 1,
+        "name": "bulbasaur",
+        "types": [
+            "grass",
+            "poison"
+        ],
+        "url": "http://localhost:5000/images/1.png"
+    }
+],
+"totalPokemons": 721
+}
