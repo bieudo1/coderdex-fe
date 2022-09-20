@@ -1,6 +1,7 @@
 import Box from '@mui/material/Box';
 import { FormProvider, FTextField } from './form';
 import Modal from '@mui/material/Modal';
+import { useState } from "react";
 
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
@@ -21,7 +22,17 @@ const style = {
     boxShadow: 24,
     p: 4,
 };
-
+const style1 = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 200,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+};
 const defaultValues = {
     name: '',
     id: '',
@@ -33,6 +44,7 @@ const defaultValues = {
 export default function PokemonModal({ open, setOpen }) {
     const navigate = useNavigate()
     const methods = useForm(defaultValues);
+    const [openErr, setOpenErr] = useState(false);
     const {
         handleSubmit,
         formState: { isSubmitting },
@@ -41,11 +53,16 @@ export default function PokemonModal({ open, setOpen }) {
 
     const onSubmit = (data) => {
         const { name, id, url, type1, type2 } = data
-        dispatch(addPokemon({ name, id, imgUrl: url, types: [type1, type2] }))
-        navigate(`/pokemons/${id}`)
+        if (name && id && url && (type1 || type2)){
+            dispatch(addPokemon({ name, id, imgUrl: url, types: [type1, type2] }))
+            navigate(`/pokemons/${id}`)
+        }else{
+            setOpenErr(true)
+        }
     };
 
     const handleClose = () => setOpen(false);
+    const handleCloseErr = () => setOpenErr(false);
 
     return (
         <div>
@@ -137,6 +154,11 @@ export default function PokemonModal({ open, setOpen }) {
                     </FormProvider>
                 </Box>
             </Modal>
+                <Modal open={openErr} onClose={handleCloseErr}>
+                    <Box sx ={style1}>
+                    name, id, url phải có dữ liệu và phải có ít nhấn 1 type
+                    </Box>
+                </Modal>
         </div>
     );
 }
